@@ -1,18 +1,13 @@
-"""A class that defines one instance of a game"""
+"""A class that defines an instance of a game"""
 
-class Game():
+class Game:
     """an instance in this class represents a single game"""
 
-    def __init__(self):
+    def __init__(self, word):
         """Initialize attributes to describe a game."""
-        self.game_word =
-
-        self.game_alphabet
-        self.game_word_set 
+        self.word = []
 
 
-        self.model = model
-        self.year = year
         self.odometer_reading = 0
         
     def get_descriptive_name(self):
