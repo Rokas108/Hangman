@@ -3,32 +3,30 @@
 class Game:
     """an instance in this class represents a single game"""
 
-    def __init__(self, word):
+    def __init__(self):
         """Initialize attributes to describe a game."""
         self.word = []
-
+        self.guess = []
+        self.current_letter = ""
+        self.correct_letter = True
 
         self.odometer_reading = 0
         
-    def get_descriptive_name(self):
-        """Return a neatly formatted descriptive name."""
-        long_name = str(self.year) + ' ' + self.manufacturer + ' ' + self.model
-        return long_name.title()
-    
-    def read_odometer(self):
-        """Print a statement showing the car's mileage."""
-        print("This car has " + str(self.odometer_reading) + " miles on it.")
-        
-    def update_odometer(self, mileage):
-        """
-        Set the odometer reading to the given value.
-        Reject the change if it attempts to roll the odometer back.
-        """
-        if mileage >= self.odometer_reading:
-            self.odometer_reading = mileage
-        else:
-            print("You can't roll back an odometer!")
-    
-    def increment_odometer(self, miles):
-        """Add the given amount to the odometer reading."""
-        self.odometer_reading += miles
+    def initialize_word(self, word):
+        for letter in word:
+            self.word.append(letter)
+
+    def initialize_guess_word(self):
+        """Create a quess based on the game's word"""
+        for letter in self.word:
+            self.guess.append("_")
+
+    def update_guess(self):
+        """For every letter in game's word that is the same as current letter, reveal that letter"""
+        index = 0
+        self.correct_letter = False
+        for letter in self.word:
+            if letter.lower() == self.current_letter.lower():
+                self.guess[index] = letter.upper()
+                self.correct_letter = True
+            index +=1
