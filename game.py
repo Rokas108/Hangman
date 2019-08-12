@@ -26,7 +26,7 @@ class Game:
         self.correct_letter = False
         for letter in self.word:
             if letter.lower() == self.current_letter.lower():
-                self.guess[index] = letter.upper()
+                self.guess[index] = letter
                 self.correct_letter = True
             index +=1
     

@@ -30,30 +30,32 @@ while intends_to_play is True:
         random_key = randint(1, 49)
         instance.initialize_word(dict_of_words[random_key])
         instance.initialize_guess_word()
-        while hang_index is not 8 or game_won != True:
+        while hang_index is not 8 and instance.game_won != True:
             instance.current_letter = input("\nPlease enter an alphabetical charater you suspect is present in the mystery word:")
-            if instance.current_letter.isalpha():
-                instance.update_guess()
-                if instance.correct_letter:
-                    print("\nCongratulations, this letter is present")
-                    print("\n" + " ".join(instance.guess))
+            if instance.game_won == False:
+                if instance.current_letter.isalpha():
+                    instance.update_guess()
+                    instance.check_if_game_won()
+                    if instance.correct_letter:
+                        print("\nCongratulations, this letter is present")
+                        print("\n" + " ".join(instance.guess))
+                    else:
+                        with open(image_filepaths[hang_index]) as file_object:    
+                            contents = file_object.read()
+                        print(contents)
+                        print(" ".join(instance.guess))
+                        hang_index += 1
+                    instance.check_if_game_won()
+                    if instance.game_won == True:
+                        print("You have won the game. Praise be!\n")
+                        players_answer = input("If you would fancy another one of em' games, please enter Y, otherwise GG and Farewell:")
+                    if (hang_index - 1) == 7:
+                        print("You have been hanged\n")
+                        players_answer = input("If you would fancy another one of em' games, please enter Y, otherwise GG and Farewell:")
                 else:
-                    with open(image_filepaths[hang_index]) as file_object:    
-                        contents = file_object.read()
-                    print(contents)
-                    print(" ".join(instance.guess))
-                    hang_index += 1
-                instance.check_if_game_won()
-                if instance.game_won == True:
-                    print("You have won the game. Praise be!\n")
-                    players_answer = input("If you would fancy another one of em' games, please enter Y, otherwise GG and Farewell:")
-                if (hang_index - 1) == 7:
-                    print("You have been hanged\n")
-                    players_answer = input("If you would fancy another one of em' games, please enter Y, otherwise GG and Farewell:")
-            else:
-                print("\nThe character is missing from the alphabet")
+                    print("\nThe character is missing from the alphabet")
     except:
         pass
-    if  players_answer != "Y":
+    if  players_answer != "Y" and players_answer != "y":
         intends_to_play = False
             
