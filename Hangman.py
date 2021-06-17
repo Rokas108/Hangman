@@ -11,7 +11,7 @@ image_filepaths = (
 dict_of_words = {}
 dict_key = 0
 players_answer = "Y"
-with open('\\Users\\Lenovo\\Desktop\\GitHUB\\Hangman\\words.txt') as file_object:
+with open('.\\words.txt') as file_object:
     for line in file_object:
         dict_key += 1
         dict_of_words[dict_key] = line.strip()
@@ -30,7 +30,7 @@ while intends_to_play is True:
         random_key = randint(1, 49)
         instance.initialize_word(dict_of_words[random_key])
         instance.initialize_guess_word()
-        while hang_index is not 8 and instance.game_won != True:
+        while hang_index != 8 and instance.game_won != True:
             instance.current_letter = input("\nPlease enter an alphabetical charater you suspect is present in the mystery word:")
             if instance.game_won == False:
                 if instance.current_letter.isalpha():
